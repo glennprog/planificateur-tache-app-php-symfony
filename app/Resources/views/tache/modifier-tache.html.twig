@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% set conf_modifier_tache_vue =
+    {
+        'activation_edit_form_modifier_tache':true,
+    }
+%}
+
+{% if conf_modifier_tache_vue.activation_edit_form_modifier_tache and reponse.resultat != '{}' and  reponse.message == 'success'%}
+    {% form_theme reponse.edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% endif %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Modifier ma tâche</h1>
+    <div>
+
+    {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
+        <div id="form-request" class="container">
+            {% if conf_modifier_tache_vue.activation_edit_form_modifier_tache %}
+                {{ form_start(reponse.edit_form) }}
+                {{ form_widget(reponse.edit_form) }}
+                <ul class="ul-button">
+                    <li class="li-button">
+                        <input class="successButton a-button" type="submit" value="Modifier" />
+                    </li>
+                    <li class="li-button">
+                        <a class='infoButton a-button' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
+                    </li>
+                </ul>
+                {{ form_end(reponse.edit_form) }}
+            {% endif %}
+        <div>
+    {% else %}
+        <p><strong>La tâche demandée n'existe pas.</strong> Veuillez repartir à la liste des tâches.</p>
+        <div>
+            <ul class="ul-button">
+                <li class="li-button">
+                    <a class='infoButton a-button' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
+                </li>
+            </ul>
+        <div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% set conf_nouvelle_tache_vue =
+    {
+        'activation_form_nouvelle_tache':true,
+    }
+%}
+
+{% if conf_nouvelle_tache_vue.activation_form_nouvelle_tache %}
+    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% endif %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Création d'une nouvelle tâche</h1>
+    <div>
+
+    {% if conf_nouvelle_tache_vue.activation_form_nouvelle_tache %}
+        <div id="form-request" class="container">
+            
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <ul class="ul-button">
+                    <li class="li-button">
+                        <input class='successButton a-button' type="submit" value="Ajouter" />
+                    </li>
+                    <li class="li-button">
+                        <a class='infoButton a-button' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
+                    </li>
+                </ul>
+                {{ form_end(form) }}
+        <div>
+    {% else %}
+        <p><strong>L'autorisation</strong> pour ajouter une tâche est refusée.</p>
+        <ul class="ul-button">
+            <li class="li-button">
+                <a class='infoButton a-button' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
+            </li>
+        </ul>
+    {% endif %}
+         
+  
+
+{% endblock %}

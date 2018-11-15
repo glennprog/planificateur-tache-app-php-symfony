@@ -7,6 +7,9 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    app.version: 0.1.0
+    app.title: 'Planificateur Tâche'
+    app.title_2: 'Tâche Manageur'
 
 framework:
     #esi: ~
@@ -37,6 +40,10 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        version: '%app.version%'
+        title: '%app.title%'
+        title_2: '%app.title_2%'
 
 # Doctrine Configuration
 doctrine:

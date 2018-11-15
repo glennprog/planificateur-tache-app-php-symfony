@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% set vue_routes = 
+        {
+            'build_with_path_name':false,
+            'app_dev':true,
+        }
+    %}
+
+    {{ vue_routes.build_with_path_name}}
+    
+    <h1>Routes Benchmark</h1>
+    <h2>Liste des routes disponibles de l'application</h2>
+
+    <div id="citations">
+        <p>"Celui qui sacrifie sa liberté au profit de sa sécurité ne mérite ni l'une, ni l'autre, et fini par perdre les deux."</p>
+    </div>
+
+    <div id="router">
+        <ul>
+            {% if vue_routes.build_with_path_name %}
+            {% else %}
+                {% for route_name, route in routes %}
+                    {% if vue_routes.app_dev %}
+                        <li><a href="{{'/app_dev.php' ~ route.path}}">{{'/app_dev.php' ~ route.path}}</a></li>
+                    {% else %}
+                        <li><a href="{{route.path}}">{{route.path}}</a></li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}

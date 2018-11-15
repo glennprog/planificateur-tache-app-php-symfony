@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% set conf_liste_taches_vue =
+    {
+        'id':false,
+        'guid':false,
+        'nom':true,
+        'statut':true,
+        'description':false,
+        'objectif':false,
+        'remarque':false,
+        'date_creation':true,
+        'date_mise_jour':false,
+        'action':false
+    }
+%}
+
+{% block body %}
+
+    <div class="container">
+
+        <h1>Ma liste de tâches</h1>
+        
+        {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
+        
+            <table class="table table-bordered table-hover table-sm table-liste">
+                <thead>
+                    <tr>
+                        {% if conf_liste_taches_vue.id %}<th>ID</th>{% endif %}
+                        {% if conf_liste_taches_vue.guid %}<th>GUID</th>{% endif %}
+                        {% if conf_liste_taches_vue.nom %} <th>Nom</th>{% endif %}
+                        {% if conf_liste_taches_vue.statut %}<th>Statut</th>{% endif %}
+                        {% if conf_liste_taches_vue.description %}<th>Description</th>{% endif %}
+                        {% if conf_liste_taches_vue.objectif %}<th>Objectif</th>{% endif %}
+                        {% if conf_liste_taches_vue.remarque %}<th>Remarque</th>{% endif %}
+                        {% if conf_liste_taches_vue.date_creation %}<th>Date de création</th>{% endif %}
+                        {% if conf_liste_taches_vue.date_mise_jour %}<th>Date de mise à jour</th>{% endif %}
+                        {% if conf_liste_taches_vue.action %}<th>Action</th>{% endif %}
+                        
+                    </tr>
+                <thead>
+                <tbody>
+                    {% for tache in liste_taches %}
+                    <tr>
+                        {% if conf_liste_taches_vue.id %}<td><a href="{{ path('consulter_tache', {'id':tache.id}) }}">{{ tache.id }}</a></td>{% endif %}
+                        {% if conf_liste_taches_vue.guid %}<td>{{ tache.guid }}</td>{% endif %}
+                        {% if conf_liste_taches_vue.nom %}<td><a href="{{ path('consulter_tache', {'id':tache.id}) }}">{{ tache.nom }}</a></td>{% endif %}
+                        {% if conf_liste_taches_vue.statut %}<td>{{ tache.statut }}</td>{% endif %}
+                        {% if conf_liste_taches_vue.description %}<td>{{ tache.description }}</td>{% endif %}
+                        {% if conf_liste_taches_vue.objectif %}<td>{{ tache.objectif }}</td>{% endif %}
+                        {% if conf_liste_taches_vue.remarque %}<td>{{ tache.remarque }}</td>{% endif %}
+                        {% if conf_liste_taches_vue.date_creation %}<td>{{ tache.datecreation|date('Y-m-d H:i:s') }}</td>{% endif %}
+                        {% if conf_liste_taches_vue.date_mise_jour %}<td>{{ tache.datemiseajour|date('Y-m-d H:i:s') }}</td>{% endif %}
+                        {% if conf_liste_taches_vue.action %}
+                            <td>
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('consulter_tache', {'id':tache.id}) }}">Consulter</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('modifier_tache', {'id':tache.id}) }}">Modifier</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('supprimer_tache', {'id':tache.id}) }}">Supprimer</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}         
+                </tbody>
+            </table>
+            {% else %}
+                <p><strong>Il n'y a pas de tâches disponibles dans la liste.</strong> Commencer par créer une nouvelle tâche.</p>
+            {% endif %}
+            <ul class="ul-button">
+                <li class="li-button">
+                    <a class='successButton a-button' href="{{ path('nouvelle_tache') }}">Nouvelle Tâche</a>
+                </li>
+            </ul>
+    </div>
+
+{% endblock %}
+
+

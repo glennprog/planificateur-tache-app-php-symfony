@@ -1,0 +1,22 @@
+body{
+    /*background-color:#808080;*/
+    background-color:#4d4b4b;
+}
+
+a{
+    color:lightgray;
+}
+
+.table th{
+    color: whitesmoke;
+    vertical-align: middle;
+}
+
+.table td{
+    color: antiquewhite;
+    vertical-align: middle;
+}
+
+label{
+    color: whitesmoke;
+}

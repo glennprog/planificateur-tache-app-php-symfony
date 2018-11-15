@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% set conf_tache_vue =
+    {
+        'id':true,
+        'nom':true,
+        'statut':true,
+        'objectif':true,
+        'remarque':true,
+        'date_creation':true,
+        'date_mise_jour':true,
+        'guid':true,
+        'description':true,
+    }
+%}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Ma tâche</h1>
+
+        {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
+            {% set tache = reponse.resultat %}
+            <table class="table table-bordered table-hover table-sm">
+                <tbody>
+                    {% if conf_tache_vue.id %}
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ tache.id }}</td>
+                        </tr>
+                    {% endif %} 
+                    {% if conf_tache_vue.nom %}
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ tache.nom }}</td>
+                        </tr>
+                    {% endif %} 
+                    {% if conf_tache_vue.statut %}
+                        <tr>
+                            <th>Statut</th>
+                            <td>{{ tache.statut }}</td>
+                        </tr>
+                    {% endif %} 
+                    {% if conf_tache_vue.description %}
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ tache.description }}</td>
+                        </tr>
+                    {% endif %}  
+                    {% if conf_tache_vue.objectif %}
+                        <tr>
+                            <th>Objectif</th>
+                            <td>{{ tache.objectif }}</td>
+                        </tr>
+                    {% endif %} 
+                    {% if conf_tache_vue.remarque %}
+                        <tr>
+                            <th>Remarque</th>
+                            <td>{{ tache.remarque }}</td>
+                        </tr>
+                    {% endif %} 
+                    {% if conf_tache_vue.date_creation %}
+                        <tr>
+                            <th>Créée le </th>
+                            <td>{{ tache.datecreation|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                    {% endif %} 
+                    {% if conf_tache_vue.date_mise_jour %}
+                        <tr>
+                            <th>Mise à jour le </th>
+                            <td>{{ tache.datemiseajour|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                    {% endif %} 
+                    {% if conf_tache_vue.guid %}
+                        <tr>
+                            <th>GUID</th>
+                            <td>{{ tache.guid }}</td>
+                        </tr>
+                    {% endif %}          
+                </tbody>
+            </table>
+
+        {% else %}
+            <p><strong>La tâche demandée n'existe pas.</strong> Veuillez repartir à la liste des tâches.</p>
+        {% endif %}
+
+        <ul class="ul-button">
+            {% if reponse.message == 'success' %}
+                <li class="li-button">
+                    <a class='successButton a-button' href="{{ path('modifier_tache', {'id':tache.id} ) }}">Modifier</a>
+                </li>
+                <li class="li-button">
+                    <a class='dangerButton a-button' href="{{ path('supprimer_tache', {'id':tache.id}) }}">Supprimer</a>
+                </li>
+            {% endif %}
+            <li class="li-button">
+                <a class='infoButton a-button' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+
