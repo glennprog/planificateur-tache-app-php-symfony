@@ -7,7 +7,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-    app.version: 0.1.0
+    app.version: 0.1.1
     app.title: 'Planificateur Tâche'
     app.title_2: 'Tâche Manageur'
 
