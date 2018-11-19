@@ -2,3 +2,173 @@
     background-color: #f48c03;
     color: white;
 }
+
+.flex-container {
+    background-color: white;
+    /*resize: horizontal;*/
+    overflow: hidden;
+    display: flex;
+    /*margin: 1em;*/
+    margin-bottom: 0px;
+    margin-top:0px;
+ }
+
+ .flex-container-action{
+    background-color: white;
+    /*resize: horizontal;*/
+    overflow: hidden;
+    display: flex;
+    margin-bottom: 0px;
+    /*margin-bottom: 0px;*/
+ }
+
+ .auto {
+    flex: auto;
+  }
+
+  .item-flex {
+    margin: 1em;
+    padding: 0.5em;
+    width: 110px;
+    min-width: 0;
+    /*background-color: #1B5385;*/
+    color: rgb(117, 116, 116);
+    font-family: monospace;
+  }
+
+  .item-flex-auto{
+    /*margin: 1em;*/
+    padding: 0.5em;
+    width: 110px;
+    min-width: 0;
+    /*background-color: #1B5385;*/
+    color: rgb(117, 116, 116);
+    font-family: monospace;
+  }
+
+  .item-flex-auto-grid-data{
+      margin-bottom: 0px;
+    /*margin: 1em;*/
+    /*padding: 0.5em;*/
+    width: 110px;
+    min-width: 0;
+    height: 30px;
+    /*background-color: #1B5385;*/
+    font-family: monospace;
+  }
+
+
+
+  .data-style-label{
+    color: rgb(117, 116, 116);
+  }
+
+  .principale_information_tache_action{
+      margin-top: 21px;
+  }
+
+  .link-page-description-tache{
+    margin-right: 9px;
+  }
+
+  .link-page-objectif-tache{
+    margin-right: 9px;
+  }
+
+  .link-page-remarque-tache{
+    margin-right: 9px;
+    
+  }
+
+  .a-button-link-page-description-tache{
+    color: #3997b6;
+    font-weight: bold;
+  }
+
+  .a-button-link-page-objectif-tache{
+    color: #3997b6;
+    font-weight: bold;
+  }
+  
+  .a-button-link-page-remarque-tache{
+    color: #3997b6;
+    font-weight: bold;
+  }
+
+  .a-button-link-page-description-tache:hover{
+    text-decoration: none;
+    color: rgb(117, 116, 116);
+    font-weight: 400;
+  }
+
+  .a-button-link-page-objectif-tache:hover{
+    text-decoration: none;
+    color: rgb(117, 116, 116);
+    font-weight: 400;
+  }
+
+  .a-button-link-page-remarque-tache:hover{
+    text-decoration: none;
+    color: rgb(117, 116, 116);
+    font-weight: 400;
+  }
+
+  .principale_information_tache{
+    border-left: 6px solid red;
+    border-right : 1px solid lightblue;
+    border-top : 1px solid lightblue;
+    border-bottom : 1px solid lightblue;
+    
+    padding: 5px; 
+  }
+
+  .a-action-consulter{
+    margin-right: 9px;
+  }
+
+  .consulter-tache-description{
+    margin-top: 36px;
+  }
+
+  .consulter-tache-objectif{
+    margin-top: 36px;
+  }
+
+  .consulter-tache-remarque{
+    margin-top: 36px;
+  }
+
+
+  .data-style-label-thead{
+    /*margin: 1em;*/
+    padding: 0.5em;
+    width: 110px;
+    min-width: 0;
+    /*background-color: #1B5385;*/
+    color: rgb(117, 116, 116);
+    font-family: monospace;
+  }
+
+
+  .data-style-data-tbody{
+    /*margin: 1em;*/
+    padding: 0.5em;
+    width: 110px;
+    min-width: 0;
+    /*background-color: #1B5385;*/
+    
+    font-family: monospace;
+  }
+
+  .data-style-data-tbody a{
+    text-decoration: none;
+    color: #212529;
+  }
+
+  .data-style-data-tbody a:hover{
+    color: #3997b6;
+  }
+  
+  .table-liste tbody tr:hover a{
+    background-color: #CCE7E7;
+  }

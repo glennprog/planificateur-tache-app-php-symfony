@@ -13,33 +13,91 @@
 {% block body %}
 
     <div class="container">
-        <h1>Création d'une nouvelle tâche</h1>
-    <div>
+    
+        <h1 class="h1-app">Création d'une nouvelle tâche</h1>
+        
+        {% if conf_nouvelle_tache_vue.activation_form_nouvelle_tache %}
+           
+                
+                    {{ form_start(form) }}
 
-    {% if conf_nouvelle_tache_vue.activation_form_nouvelle_tache %}
-        <div id="form-request" class="container">
-            
-                {{ form_start(form) }}
-                {{ form_widget(form) }}
-                <ul class="ul-button">
-                    <li class="li-button">
-                        <input class='successButton a-button' type="submit" value="Ajouter" />
-                    </li>
-                    <li class="li-button">
-                        <a class='infoButton a-button' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
-                    </li>
-                </ul>
-                {{ form_end(form) }}
-        <div>
-    {% else %}
-        <p><strong>L'autorisation</strong> pour ajouter une tâche est refusée.</p>
-        <ul class="ul-button">
-            <li class="li-button">
-                <a class='infoButton a-button' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
-            </li>
-        </ul>
-    {% endif %}
-         
-  
+                    <div class="flex-container-nouvelle-tache">
+                        <div class="nouvelle-tache-input-label data-style-label">
+                            Nom de la tâche
+                        </div>
+                        <div class="nouvelle-tache-input">
+                            {{ form_widget(form.nom, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
+                        </div>
+                        <div class="nouvelle-tache-input-error">
+                            {{ form_errors(form.nom) }}
+                        </div>
+                    </div>
+                    
+                    <div class="flex-container-nouvelle-tache">
+                        <div class="nouvelle-tache-input-label data-style-label">
+                            Statut de la tâche
+                        </div>
+                        <div class="nouvelle-tache-input">
+                            {{ form_widget(form.statut, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
+                        </div>
+                        <div class="nouvelle-tache-input-error">
+                            {{ form_errors(form.statut) }}
+                        </div>
+                    </div>
+
+                    <div class="flex-container-nouvelle-tache">
+                        <div class="nouvelle-tache-input-label data-style-label">
+                            Description de la tâche
+                        </div>
+                        <div class="nouvelle-tache-input">
+                            {{ form_widget(form.description, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
+                        </div>
+                        <div class="nouvelle-tache-input-error">
+                            {{ form_errors(form.description) }}
+                        </div>
+                    </div>
+
+                    <div class="flex-container-nouvelle-tache">
+                        <div class="nouvelle-tache-input-label data-style-label">
+                            Objectif de la tâche
+                        </div>
+                        <div class="nouvelle-tache-input">
+                            {{ form_widget(form.objectif, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
+                        </div>
+                        <div class="nouvelle-tache-input-error">
+                            {{ form_errors(form.objectif) }}
+                        </div>
+                    </div>
+
+                    <div class="flex-container-nouvelle-tache">
+                        <div class="nouvelle-tache-input-label data-style-label">
+                            Remarque de la tâche
+                        </div>
+                        <div class="nouvelle-tache-input">
+                            {{ form_widget(form.remarque, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
+                        </div>
+                        <div class="nouvelle-tache-input-error">
+                            {{ form_errors(form.remarque) }}
+                        </div>
+                    </div>    
+
+                    <div class="nouvelle-tache-input-flex-container-action">
+                        <div class="nouvelle-tache-input-item-flex nouvelle-tache-input-auto">
+                            <input class='successButton a-button' type="submit" value="Ajouter" />
+                            <a class='infoButton a-button a-action-consulter' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
+                        </div>
+                    </div>
+
+                    {{ form_end(form) }}
+           
+        {% else %}
+            <p><strong>L'autorisation</strong> pour ajouter une tâche est refusée.</p>
+            <ul class="ul-button">
+                <li class="li-button">
+                    <a class='infoButton a-button' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
+                </li>
+            </ul>
+        {% endif %}
+    <div>
 
 {% endblock %}

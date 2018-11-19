@@ -1,0 +1,61 @@
+  .flex-container-nouvelle-tache {
+    display: flex;
+    flex-direction: column;
+    /*background-color: DodgerBlue;*/
+  }
+
+  .nouvelle-tache-input-label{
+    margin: 0px 10px 1px 3px;
+    text-align: left;
+    font-family: monospace;
+  }
+
+  .nouvelle-tache-input{
+    width: 100%;
+    margin: 0px 10px 1px 3px;
+    font-size: 30px;
+    font-family: monospace;
+
+    border-left: 3px solid red;
+    border-right : 1px solid rgb(187, 186, 186);
+    border-top : 1px solid rgb(187, 186, 186);
+    border-bottom : 1px solid rgb(187, 186, 186);
+    
+  }
+
+  .nouvelle-tache-input-border{
+    border-radius: 0px;
+  }
+
+  .nouvelle-tache-input-error{
+    background-color: #d15656;
+    width: auto;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+  }
+
+
+
+  .nouvelle-tache-input-flex-container-action{
+   
+    display: flex;
+    margin-bottom: 0px;
+    margin-bottom: 30px;
+    }
+
+ .nouvelle-tache-input-auto {
+    flex: auto;
+  }
+
+  .nouvelle-tache-input-item-flex{
+    margin-bottom: 0px;
+  /*margin: 1em;*/
+  /*padding: 0.5em;*/
+  width: 110px;
+  min-width: 0;
+  height: 30px;
+  /*background-color: #1B5385;*/
+  font-family: monospace;
+}

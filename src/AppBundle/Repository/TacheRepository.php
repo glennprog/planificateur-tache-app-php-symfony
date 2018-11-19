@@ -10,4 +10,51 @@ namespace AppBundle\Repository;
  */
 class TacheRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function consulterTacheDescription($criteria)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT t.id, t.guid, t.nom, t.statut, t.date_creation, t.description FROM AppBundle:Tache\Tache t WHERE t.id = :id ');
+        $query->setParameter('id', $criteria['id']);
+        $tache = $query->getResult();
+        if(count($tache) == 0)
+        {
+            return null;
+        }
+        else
+        {
+            return $tache[0]; 
+        }
+    }
+
+    public function consulterTacheObjectif($criteria)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT t.id, t.guid, t.nom, t.statut, t.date_creation, t.objectif FROM AppBundle:Tache\Tache t WHERE t.id = :id ');
+        $query->setParameter('id', $criteria['id']);
+        $tache = $query->getResult();
+        if(count($tache) == 0)
+        {
+            return null;
+        }
+        else
+        {
+            return $tache[0]; 
+        }
+    }
+
+    public function consulterTacheRemarque($criteria)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT t.id, t.guid, t.nom, t.statut, t.date_creation, t.remarque FROM AppBundle:Tache\Tache t WHERE t.id = :id ');
+        $query->setParameter('id', $criteria['id']);
+        $tache = $query->getResult();
+        if(count($tache) == 0)
+        {
+            return null;
+        }
+        else
+        {
+            return $tache[0]; 
+        }
+    }
 }

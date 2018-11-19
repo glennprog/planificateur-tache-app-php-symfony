@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% set conf_tache_vue =
+    {
+        'id':true,
+        'nom':true,
+        'statut':true,
+        'objectif':true,
+        'remarque':true,
+        'date_creation':true,
+        'date_mise_jour':true,
+        'guid':true,
+        'description':true,
+    }
+%}
+
+{% block body %}
+
+    <div class="container">
+
+        <h1 class="h1-app">Ma tâche</h1>
+
+        {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
+            <div class="flex-container">
+                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Nom</span> : {{reponse.resultat.nom}}</div>
+            </div>
+            <div class="flex-container">
+                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Créée le : </span>{{reponse.resultat.date_creation|date('Y-m-d H:i:s')}}</div>
+                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Statut</span> : {{reponse.resultat.statut}}</div>
+            </div>
+        {% endif %}
+
+        <h2 class="h2-app consulter-tache-remarque">Remarque</h2>
+
+        {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
+            {% set tache = reponse.resultat %}
+         
+            <div id="principale_information_tache" class="principale_information_tache">
+                    <div class="flex-container">
+                        <div class="item-flex-auto-grid-data auto">{{tache.remarque}}</div>
+                    </div>
+                    <div class="flex-container">
+                        <div class="item-flex-auto-grid-data auto">
+                            <span class="link-page-objectif-tache"><a class="a-button-link-page-description-tache" href="{{path('consulter_tache_description', {'id':tache.id})}}">Description</a></span>
+                            <span class="link-page-remarque-tache"><a class="a-button-link-page-remarque-tache" href="{{path('consulter_tache_objectif', {'id':tache.id})}}">Objectif</a></span>
+                        </div>
+                    </div>
+            </div>
+
+        {% else %}
+            <p><strong>La tâche demandée n'existe pas.</strong> Veuillez repartir à la liste des tâches.</p>
+        {% endif %}
+
+        <div class="principale_information_tache_action">
+                <div class="flex-container-action">
+                    <div class="item-flex-auto-grid-action-consulter auto">
+                        {% if reponse.message == 'success' %}
+                        <a class='grayButton a-button a-action-consulter' href="{{ path('consulter_tache', {'id':tache.id} ) }}">Retour</a>
+                        <a class='dangerButton a-button a-action-consulter' href="{{ path('supprimer_tache', {'id':tache.id} ) }}">Supprimer</a>
+                        {% endif %}
+                        <a class='infoButton a-button a-action-consulter' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
+                    </div>
+                </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+

@@ -19,12 +19,12 @@
 
     <div class="container">
 
-        <h1>Ma liste de tâches</h1>
+        <h1 class="h1-app">Ma liste de tâches</h1>
         
         {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
         
             <table class="table table-bordered table-hover table-sm table-liste">
-                <thead>
+                <thead class="data-style-label-thead">
                     <tr>
                         {% if conf_liste_taches_vue.id %}<th>ID</th>{% endif %}
                         {% if conf_liste_taches_vue.guid %}<th>GUID</th>{% endif %}
@@ -39,7 +39,7 @@
                         
                     </tr>
                 <thead>
-                <tbody>
+                <tbody class="data-style-data-tbody">
                     {% for tache in liste_taches %}
                     <tr>
                         {% if conf_liste_taches_vue.id %}<td><a href="{{ path('consulter_tache', {'id':tache.id}) }}">{{ tache.id }}</a></td>{% endif %}

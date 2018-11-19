@@ -5,6 +5,7 @@ namespace AppBundle\Form\Tache;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class TacheType extends AbstractType
 {
@@ -16,9 +17,16 @@ class TacheType extends AbstractType
         $builder
             ->add('nom')
             ->add('statut')
-            ->add('description')
-            ->add('objectif')
-            ->add('remarque')
+
+            ->add('description', TextareaType::class, array(
+                'attr' => array('cols' => '5', 'rows' => '3'),
+            ))
+            ->add('objectif', TextareaType::class, array(
+                'attr' => array('cols' => '5', 'rows' => '3'),
+            ))
+            ->add('remarque', TextareaType::class, array(
+                'attr' => array('cols' => '5', 'rows' => '3'),
+            ))
         ;
     }
 

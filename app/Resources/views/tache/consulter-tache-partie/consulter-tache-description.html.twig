@@ -21,27 +21,26 @@
         <h1 class="h1-app">Ma tâche</h1>
 
         {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
+            <div class="flex-container">
+                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Nom</span> : {{reponse.resultat.nom}}</div>
+            </div>
+            <div class="flex-container">
+                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Créée le : </span>{{reponse.resultat.date_creation|date('Y-m-d H:i:s')}}</div>
+                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Statut</span> : {{reponse.resultat.statut}}</div>
+            </div>
+        {% endif %}
+
+        <h2 class="h2-app consulter-tache-description">Description</h2>
+
+        {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
             {% set tache = reponse.resultat %}
          
             <div id="principale_information_tache" class="principale_information_tache">
                     <div class="flex-container">
-                        <div class="item-flex-auto-grid-data auto"><span class="data-style-label">ID</span> : {{tache.id}}</div>
-                        <div class="item-flex-auto-grid-data auto"><span class="data-style-label">GUID</span> : {{tache.guid}}</div>
+                        <div class="item-flex-auto-grid-data auto">{{tache.description}}</div>
                     </div>
-
-                    <div class="flex-container">
-                        <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Nom</span> : {{tache.nom}}</div>
-                        <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Statut</span> : {{tache.statut}}</div>
-                    </div>
-
-                    <div class="flex-container">
-                        <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Créée le : </span>{{tache.datecreation|date('Y-m-d H:i:s')}}</div>
-                        <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Mise à jour le : </span>{{tache.datemiseajour|date('Y-m-d H:i:s')}}</div>
-                    </div>
-
                     <div class="flex-container">
                         <div class="item-flex-auto-grid-data auto">
-                            <span class="link-page-description-tache"><a class="a-button-link-page-description-tache" href="{{path('consulter_tache_description', {'id':tache.id})}}">Description</a></span>
                             <span class="link-page-objectif-tache"><a class="a-button-link-page-objectif-tache" href="{{path('consulter_tache_objectif', {'id':tache.id})}}">Objectif</a></span>
                             <span class="link-page-remarque-tache"><a class="a-button-link-page-remarque-tache" href="{{path('consulter_tache_remarque', {'id':tache.id})}}">Remarque</a></span>
                         </div>
@@ -56,7 +55,7 @@
                 <div class="flex-container-action">
                     <div class="item-flex-auto-grid-action-consulter auto">
                         {% if reponse.message == 'success' %}
-                        <a class='successButton a-button a-action-consulter' href="{{ path('modifier_tache', {'id':tache.id} ) }}">Modifier</a>
+                        <a class='grayButton a-button a-action-consulter' href="{{ path('consulter_tache', {'id':tache.id} ) }}">Retour</a>
                         <a class='dangerButton a-button a-action-consulter' href="{{ path('supprimer_tache', {'id':tache.id} ) }}">Supprimer</a>
                         {% endif %}
                         <a class='infoButton a-button a-action-consulter' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
