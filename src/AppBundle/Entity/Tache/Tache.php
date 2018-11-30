@@ -4,6 +4,7 @@ namespace AppBundle\Entity\Tache;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Composant\PrincipalesInformation\PrincipalesInformation;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tache
@@ -23,26 +24,25 @@ class Tache extends PrincipalesInformation
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="statut", type="string", length=255, nullable=false, unique=false)
+     * @Assert\GreaterThan(-1)
+     * @ORM\Column(name="ordre", type="integer", nullable=true, unique=false)
      */
-    private $statut;
+    private $ordre;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="objectif", type="string", length=255, nullable=true, unique=false)
+     * @ORM\Column(name="est_archivee", type="boolean", nullable=false, unique=false)
      */
-    private $objectif;
+    private $est_archivee;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="remarque", type="string", length=255, nullable=true, unique=false)
+     * Constructor
      */
-    private $remarque;
-
+    public function __construct()
+    {
+        parent::__construct();
+        $this->est_archivee = false;
+        $this->ordre = 0;
+    }
 
     /**
      * Get id
@@ -55,74 +55,46 @@ class Tache extends PrincipalesInformation
     }
 
     /**
-     * Set statut
-     *
-     * @param string $statut
-     *
-     * @return Tache
+     * Get the value of ordre
      */
-    public function setStatut($statut)
+    public function getOrdre()
     {
-        $this->statut = $statut;
+        return $this->ordre;
+    }
+
+    /**
+     * Set the value of ordre
+     *
+     * @return  self
+     */
+    public function setOrdre($ordre)
+    {
+        $this->ordre = $ordre;
 
         return $this;
     }
 
     /**
-     * Get statut
+     * Set estArchivee
      *
-     * @return string
-     */
-    public function getStatut()
-    {
-        return $this->statut;
-    }
-
-    /**
-     * Set objectif
-     *
-     * @param string $objectif
+     * @param boolean $estArchivee
      *
      * @return Tache
      */
-    public function setObjectif($objectif)
+    public function setEstArchivee($estArchivee)
     {
-        $this->objectif = $objectif;
+        $this->est_archivee = $estArchivee;
 
         return $this;
     }
 
     /**
-     * Get objectif
+     * Get estArchivee
      *
-     * @return string
+     * @return boolean
      */
-    public function getObjectif()
+    public function getEstArchivee()
     {
-        return $this->objectif;
-    }
-
-    /**
-     * Set remarque
-     *
-     * @param string $remarque
-     *
-     * @return Tache
-     */
-    public function setRemarque($remarque)
-    {
-        $this->remarque = $remarque;
-
-        return $this;
-    }
-
-    /**
-     * Get remarque
-     *
-     * @return string
-     */
-    public function getRemarque()
-    {
-        return $this->remarque;
+        return $this->est_archivee;
     }
 }

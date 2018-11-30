@@ -23,16 +23,37 @@ class PrincipalesInformation
         /**
          * @var string
          *
-         * @ORM\Column(name="nom", type="string", length=255, nullable=false, unique=false)
+         * @ORM\Column(name="nom", type="string", length=100, nullable=false, unique=false)
          */
         protected $nom;
 
         /**
          * @var string
          *
-         * @ORM\Column(name="description", type="string", length=255, nullable=true, unique=false)
+         * @ORM\Column(name="statut", type="string", length=100, nullable=false, unique=false)
+         */
+        protected $statut;
+
+        /**
+         * @var string
+         *
+         * @ORM\Column(name="description", type="string", length=500, nullable=true, unique=false)
          */
         protected $description;
+
+        /**
+         * @var string
+         *
+         * @ORM\Column(name="objectif", type="string", length=500, nullable=true, unique=false)
+         */
+        protected $objectif;
+
+        /**
+         * @var string
+         *
+         * @ORM\Column(name="remarque", type="string", length=500, nullable=true, unique=false)
+         */
+        protected $remarque;        
 
         /**
          * Constructor
@@ -43,6 +64,7 @@ class PrincipalesInformation
                 $this->date_mise_a_jour = new \DateTime("now");
                 $guidObj = new GuidGenerator();
                 $this->setGuid($guidObj->GUIDv4());
+                $this->statut = "#NA";
         }
 
 
@@ -123,7 +145,7 @@ class PrincipalesInformation
          * Get the value of nom
          *
          * @return  string
-         */ 
+         */
         public function getNom()
         {
                 return $this->nom;
@@ -135,7 +157,7 @@ class PrincipalesInformation
          * @param  string  $nom
          *
          * @return  self
-         */ 
+         */
         public function setNom(string $nom)
         {
                 $this->nom = $nom;
@@ -165,5 +187,78 @@ class PrincipalesInformation
                 $this->description = $description;
 
                 return $this;
+        }
+
+
+        /**
+         * Set statut
+         *
+         * @param string $statut
+         *
+         * @return  self
+         */
+        public function setStatut($statut)
+        {
+                $this->statut = $statut;
+
+                return $this;
+        }
+
+        /**
+         * Get statut
+         *
+         * @return string
+         */
+        public function getStatut()
+        {
+                return $this->statut;
+        }
+
+        /**
+         * Set objectif
+         *
+         * @param string $objectif
+         *
+         * @return  self
+         */
+        public function setObjectif($objectif)
+        {
+                $this->objectif = $objectif;
+
+                return $this;
+        }
+
+        /**
+         * Get objectif
+         *
+         * @return string
+         */
+        public function getObjectif()
+        {
+                return $this->objectif;
+        }
+
+        /**
+         * Set remarque
+         *
+         * @param string $remarque
+         *
+         * @return  self
+         */
+        public function setRemarque($remarque)
+        {
+                $this->remarque = $remarque;
+
+                return $this;
+        }
+
+        /**
+         * Get remarque
+         *
+         * @return string
+         */
+        public function getRemarque()
+        {
+                return $this->remarque;
         }
 }

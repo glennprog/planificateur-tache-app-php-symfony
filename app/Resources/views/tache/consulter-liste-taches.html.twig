@@ -11,59 +11,100 @@
         'remarque':false,
         'date_creation':true,
         'date_mise_jour':false,
-        'action':false
+        'action':false,
+        'archiver':false,
+        'ordre':true,
+        'ordre_badge':true,
+        'liste_tache_archivees':true,
+        'liste_tache_non_archivees':true,
+        'fonction_ajout_rapide_tache':true,
     }
 %}
 
 {% block body %}
 
-    <div class="container">
+    <div class="container-fluid">
 
-        <h1 class="h1-app">Ma liste de tâches</h1>
+        <h1 class="h1-app"><a class="h1-a-element" href="{{ path('consulter_liste_taches') }}">Ma liste de tâches</a></h1>
+
+        <ul class="ul-liste-tache">
+            <li>
+                <a href="{{ path('consulter_liste_taches_globales') }}"><span class="data-style-label"> Globale</span>  <span class="badge-ordre-tache">{{monitoring_liste_taches_total.taches_total}}</span></a>
+            </li>
+            <li>
+                <a href="{{ path('consulter_liste_taches_non_archivees') }}"><span class="data-style-label"> Non archivées</span> <span class="badge-ordre-tache">{{monitoring_liste_taches_total.taches_non_archivees_total}}</span></a>
+            </li>
+            <li>
+                <a href="{{ path('consulter_liste_taches_archivees') }}"><span class="data-style-label"> Archivées</span> <span class="badge-ordre-tache">{{monitoring_liste_taches_total.taches_archivees_total}}</span></a>
+            </li>
+        </ul>
         
         {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
-        
             <table class="table table-bordered table-hover table-sm table-liste">
                 <thead class="data-style-label-thead">
                     <tr>
-                        {% if conf_liste_taches_vue.id %}<th>ID</th>{% endif %}
-                        {% if conf_liste_taches_vue.guid %}<th>GUID</th>{% endif %}
-                        {% if conf_liste_taches_vue.nom %} <th>Nom</th>{% endif %}
-                        {% if conf_liste_taches_vue.statut %}<th>Statut</th>{% endif %}
-                        {% if conf_liste_taches_vue.description %}<th>Description</th>{% endif %}
-                        {% if conf_liste_taches_vue.objectif %}<th>Objectif</th>{% endif %}
-                        {% if conf_liste_taches_vue.remarque %}<th>Remarque</th>{% endif %}
-                        {% if conf_liste_taches_vue.date_creation %}<th>Date de création</th>{% endif %}
-                        {% if conf_liste_taches_vue.date_mise_jour %}<th>Date de mise à jour</th>{% endif %}
+                        {% if conf_liste_taches_vue.id %}<th><span>ID</span></th>{% endif %}
+                        {% if conf_liste_taches_vue.guid %}<th><span>GUID</span></th>{% endif %}
+                        {% if conf_liste_taches_vue.nom %}
+                            <th>
+                                <img src="{{ asset('application/images/icons8-to-do-50.png') }}"><span> Tâche</span>
+                                {% if conf_liste_taches_vue.fonction_ajout_rapide_tache %}
+                                    <input id="input_fonction_ajout_rapide_tache"  class="input_fonction_ajout_rapide_tache" type="text" maxlength="100" placeholder="ajout rapide...">
+                                    <span id="boutton_fonction_ajout_rapide_tache" class="boutton_fonction_ajout_rapide_tache">Ajouter</span>
+                                {% endif %}
+                            </th>
+                        {% endif %}
+                        {% if conf_liste_taches_vue.statut %}<th><img src="{{ asset('application/images/icons8-workflow-40.png') }}"><span> Statut</span></th>{% endif %}
+                        {% if conf_liste_taches_vue.description %}<th><span>Description</span></th>{% endif %}
+                        {% if conf_liste_taches_vue.objectif %}<th><span>Objectif</span></th>{% endif %}
+                        {% if conf_liste_taches_vue.remarque %}<th><span>Remarque</span></th>{% endif %}
+                        {% if conf_liste_taches_vue.date_creation %}<th><img class="consulter-lister-supprimer-icon-th" src="{{ asset('application/images/icons8-schedule-40.png') }}"><span> Date création</span></th>{% endif %}
+                        {% if conf_liste_taches_vue.date_mise_jour %}<th><span>Date de mise à jour</span></th>{% endif %}
+                        {% if conf_liste_taches_vue.ordre %}<th><img src="{{ asset('application/images/icons8-reduce-40.png') }}"> Ordre</th>{% endif %}
+                        {% if conf_liste_taches_vue.archiver %}<th><img class="consulter-lister-archiver-icon-th" src="{{ asset('application/images/icons8-downloads-40.png') }}"><span> Archiver</span></th>{% endif %}
                         {% if conf_liste_taches_vue.action %}<th>Action</th>{% endif %}
-                        
                     </tr>
                 <thead>
-                <tbody class="data-style-data-tbody">
+                <tbody id="tbody_table_liste" class="data-style-data-tbody">
                     {% for tache in liste_taches %}
-                    <tr>
-                        {% if conf_liste_taches_vue.id %}<td><a href="{{ path('consulter_tache', {'id':tache.id}) }}">{{ tache.id }}</a></td>{% endif %}
+                    <tr class="ligne_table_liste_tache">
+                        {% if conf_liste_taches_vue.id %}<td><a class="a-hover-highlited cursor-context-menu" href="{{ path('consulter_tache', {'id':tache.id}) }}">{{ tache.id }}</a></td>{% endif %}
                         {% if conf_liste_taches_vue.guid %}<td>{{ tache.guid }}</td>{% endif %}
-                        {% if conf_liste_taches_vue.nom %}<td><a href="{{ path('consulter_tache', {'id':tache.id}) }}">{{ tache.nom }}</a></td>{% endif %}
+                        {% if conf_liste_taches_vue.nom %}
+                            <td class="">
+                                <div class="liste-taches-nom">
+                                    <a class="a-hover-highlited cursor-context-menu" href="{{ path('consulter_tache', {'id':tache.id}) }}">{{ tache.nom }}</a>
+                                </div>
+                                <div class="liste-taches-action-volatile">
+                                    <span><img class="action-volatile-archiver-icon-tr" src="{{ asset('application/images/icons8-downloads-40.png') }}">archiver</span>
+                                    <span><img class="action-volatile-archiver-icon-tr" src="{{ asset('application/images/icons8-downloads-40.png') }}">supprimer</span>
+                                    <span><img class="action-volatile-archiver-icon-tr" src="{{ asset('application/images/icons8-downloads-40.png') }}">barrer</span>
+                                </div>
+                            </td>
+                        {% endif %}
                         {% if conf_liste_taches_vue.statut %}<td>{{ tache.statut }}</td>{% endif %}
                         {% if conf_liste_taches_vue.description %}<td>{{ tache.description }}</td>{% endif %}
                         {% if conf_liste_taches_vue.objectif %}<td>{{ tache.objectif }}</td>{% endif %}
                         {% if conf_liste_taches_vue.remarque %}<td>{{ tache.remarque }}</td>{% endif %}
                         {% if conf_liste_taches_vue.date_creation %}<td>{{ tache.datecreation|date('Y-m-d H:i:s') }}</td>{% endif %}
                         {% if conf_liste_taches_vue.date_mise_jour %}<td>{{ tache.datemiseajour|date('Y-m-d H:i:s') }}</td>{% endif %}
+                        {% if conf_liste_taches_vue.ordre %}
+                            <td class="td-ordre-tache">
+                                {% if conf_liste_taches_vue.ordre_badge %}
+                                    <span class="badge-ordre-tache">{{ tache.ordre }}</span>
+                                {% else %}
+                                    {{ tache.ordre }}
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                        {% if conf_liste_taches_vue.archiver %}
+                            <td class="td-action-archiver-tache">
+                               <a class="a-action a-archiver-tache cursor-default" href="{{ path('supprimer_tache', {'id':tache.id}) }}">&#x26CC;</a>
+                            </td>
+                        {% endif %}
                         {% if conf_liste_taches_vue.action %}
-                            <td>
-                                <ul>
-                                    <li>
-                                        <a href="{{ path('consulter_tache', {'id':tache.id}) }}">Consulter</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('modifier_tache', {'id':tache.id}) }}">Modifier</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('supprimer_tache', {'id':tache.id}) }}">Supprimer</a>
-                                    </li>
-                                </ul>
+                            <td class="td-action-supprimer-tache">
+                               <a class="a-action a-supprimer-tache cursor-supprimer-tache" href="{{ path('supprimer_tache', {'id':tache.id}) }}">&#x26CC;</a>
                             </td>
                         {% endif %}
                     </tr>
@@ -73,11 +114,11 @@
             {% else %}
                 <p><strong>Il n'y a pas de tâches disponibles dans la liste.</strong> Commencer par créer une nouvelle tâche.</p>
             {% endif %}
-            <ul class="ul-button">
-                <li class="li-button">
-                    <a class='successButton a-button' href="{{ path('nouvelle_tache') }}">Nouvelle Tâche</a>
-                </li>
-            </ul>
+            <div class="flex-container-action">
+                <div class="auto">
+                    <a class='successButton a-button a-action-consulter' href="{{ path('nouvelle_tache') }}">Nouvelle Tâche</a>
+                </div>
+            </div>
     </div>
 
 {% endblock %}

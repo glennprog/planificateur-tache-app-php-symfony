@@ -14,8 +14,8 @@
 
     <div class="container">
     
-        <h1 class="h1-app">Création d'une nouvelle tâche</h1>
-        
+        <h1 class="h1-app"><a class="h1-a-element" href="{{ path('nouvelle_tache') }}">Création d'une nouvelle tâche</a></h1>
+
         {% if conf_nouvelle_tache_vue.activation_form_nouvelle_tache %}
            
                 
@@ -23,7 +23,7 @@
 
                     <div class="flex-container-nouvelle-tache">
                         <div class="nouvelle-tache-input-label data-style-label">
-                            Nom de la tâche
+                            Tâche
                         </div>
                         <div class="nouvelle-tache-input">
                             {{ form_widget(form.nom, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
@@ -35,7 +35,7 @@
                     
                     <div class="flex-container-nouvelle-tache">
                         <div class="nouvelle-tache-input-label data-style-label">
-                            Statut de la tâche
+                            <img class="consulter-tache-description-icon" src="{{ asset('application/images/icons8-workflow-40.png') }}"> Statut
                         </div>
                         <div class="nouvelle-tache-input">
                             {{ form_widget(form.statut, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
@@ -47,7 +47,7 @@
 
                     <div class="flex-container-nouvelle-tache">
                         <div class="nouvelle-tache-input-label data-style-label">
-                            Description de la tâche
+                            <img class="consulter-tache-description-icon" src="{{ asset('application/images/icons8-resume-template-40.png') }}"> Description
                         </div>
                         <div class="nouvelle-tache-input">
                             {{ form_widget(form.description, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
@@ -59,7 +59,7 @@
 
                     <div class="flex-container-nouvelle-tache">
                         <div class="nouvelle-tache-input-label data-style-label">
-                            Objectif de la tâche
+                            <img src="{{ asset('application/images/icons8-target-40.png') }}"> Objectif
                         </div>
                         <div class="nouvelle-tache-input">
                             {{ form_widget(form.objectif, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
@@ -71,7 +71,7 @@
 
                     <div class="flex-container-nouvelle-tache">
                         <div class="nouvelle-tache-input-label data-style-label">
-                            Remarque de la tâche
+                            <img class="consulter-tache-remarque-icon" src="{{ asset('application/images/icons8-comments-40.png') }}"> Remarque
                         </div>
                         <div class="nouvelle-tache-input">
                             {{ form_widget(form.remarque, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
@@ -81,14 +81,29 @@
                         </div>
                     </div>    
 
-                    <div class="nouvelle-tache-input-flex-container-action">
+                    <div class="flex-container-nouvelle-tache nouvelle-tache-input-ordre-tache">
+                        <div class="nouvelle-tache-input-label data-style-label">
+                            Ordre de la tâche
+                        </div>
+                        <div class="nouvelle-tache-input">
+                            {{ form_widget(form.ordre, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
+                        </div>
+                        <div class="nouvelle-tache-input-error">
+                            {{ form_errors(form.ordre) }}
+                        </div>
+                    </div>   
+
+                    <div class="nouvelle-tache-input-flex-container-action nouvelle-tache-last-pill-item">
                         <div class="nouvelle-tache-input-item-flex nouvelle-tache-input-auto">
-                            <input class='successButton a-button' type="submit" value="Ajouter" />
-                            <a class='infoButton a-button a-action-consulter' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
+                            <input class='successButton a-button a-action-nouvelle' type="submit" value="Ajouter la tâche" />
+                            <a class='infoButton a-button' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
                         </div>
                     </div>
 
                     {{ form_end(form) }}
+
+
+                            
            
         {% else %}
             <p><strong>L'autorisation</strong> pour ajouter une tâche est refusée.</p>

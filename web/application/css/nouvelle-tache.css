@@ -1,6 +1,7 @@
   .flex-container-nouvelle-tache {
     display: flex;
     flex-direction: column;
+    margin-top: 17px;
     /*background-color: DodgerBlue;*/
   }
 
@@ -41,7 +42,6 @@
   .nouvelle-tache-input-flex-container-action{
    
     display: flex;
-    margin-bottom: 0px;
     margin-bottom: 30px;
     }
 
@@ -58,4 +58,16 @@
   height: 30px;
   /*background-color: #1B5385;*/
   font-family: monospace;
+}
+
+.a-action-nouvelle{
+  margin-right: 9px;
+}
+
+.nouvelle-tache-input-ordre-tache{
+  width: 200px;
+}
+
+.nouvelle-tache-last-pill-item{
+  margin-top: 17px;
 }

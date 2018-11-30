@@ -1,5 +1,5 @@
 .table-liste th{
-    background-color: #f48c03;
+    background-color: #958d84;/*f48c03;*/
     color: white;
 }
 
@@ -80,6 +80,19 @@
     
   }
 
+  .link-page-archiver-tache{
+    margin-right: 9px;
+  }
+
+  .link-page-desarchiver-tache{
+    margin-right: 9px;
+  }
+
+  .link-page-supprimer-tache{
+    margin-right: 9px;
+    
+  }
+
   .a-button-link-page-description-tache{
     color: #3997b6;
     font-weight: bold;
@@ -91,6 +104,21 @@
   }
   
   .a-button-link-page-remarque-tache{
+    color: #3997b6;
+    font-weight: bold;
+  }
+
+  .a-button-link-page-archiver-tache{
+    color: #3997b6;
+    font-weight: bold;
+  }
+
+  .a-button-link-page-desarchiver-tache{
+    color: #3997b6;
+    font-weight: bold;
+  }
+
+  .a-button-link-page-supprimer-tache{
     color: #3997b6;
     font-weight: bold;
   }
@@ -108,6 +136,24 @@
   }
 
   .a-button-link-page-remarque-tache:hover{
+    text-decoration: none;
+    color: rgb(117, 116, 116);
+    font-weight: 400;
+  }
+
+  .a-button-link-page-archiver-tache:hover{
+    text-decoration: none;
+    color: rgb(117, 116, 116);
+    font-weight: 400;
+  }
+
+  .a-button-link-page-desarchiver-tache:hover{
+    text-decoration: none;
+    color: rgb(117, 116, 116);
+    font-weight: 400;
+  }
+
+  .a-button-link-page-supprimer-tache:hover{
     text-decoration: none;
     color: rgb(117, 116, 116);
     font-weight: 400;
@@ -169,6 +215,212 @@
     color: #3997b6;
   }
   
-  .table-liste tbody tr:hover a{
+  .table-liste tbody tr:hover .a-hover-highlited{
     background-color: #CCE7E7;
   }
+
+
+  .table-liste tbody tr .a-supprimer-tache:hover{
+    background-color: rgb(213, 236, 236);
+    color: red;
+    /*font-size: 15px;*/
+    font-weight: bold;
+  }
+
+
+  .td-action-supprimer-tache{
+    font-size: 13px;
+    text-align: center;
+  }
+  
+  .cursor-context-menu{
+    cursor: context-menu;
+  }
+
+  .cursor-archiver{
+    /*cursor: default;*/
+    /*cursor: url("../web/application/images/metro/trash.png"), auto;*/
+    cursor: url("../images/icons8-downloads-40.png"), auto;
+  }
+
+  .cursor-crosshair{
+    cursor: crosshair;
+  }
+
+  .cursor-supprimer-tache{
+    cursor: url("../images/icons8-remove-50.png"), auto;
+  }
+
+
+  .cursor-ajouter{
+    cursor: url("../images/icons8-add-new-40.png"), auto;
+  }
+
+
+  .cursor-sauvegarder{
+    cursor: url("../images/icons8-save-40-green.png"), auto;
+  }
+
+  .cursor-retourner{
+    cursor: url("../images/icons8-return-40.png"), auto;
+  }
+
+.badge-container{
+  display: flex;
+  /*justify-content : center;*/
+  background-color: rgb(255, 174, 127);
+}
+
+.badge-container-data{
+  border-radius: 50%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 12px;
+  padding-bottom: 10px;
+  min-width: 50px;
+  /*min-height: 50px;*/
+  text-align: center;
+  color: dodgerblue;
+  font-weight: bold;
+  /*font-size: 18px;*/
+  background-color: aquamarine;
+}
+
+.badge-ordre-tache-old{
+  border-radius: 50%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 12px;
+  padding-bottom: 10px;
+  min-width: 50px;
+  /*min-height: 50px;*/
+  text-align: center;
+  color: dodgerblue;
+  font-weight: bold;
+  /*font-size: 18px;*/
+  background-color: rgb(202, 209, 207);
+}
+
+.badge-ordre-tache{
+  border-radius: 38%;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #363738;
+  font-weight: bold;
+  background-color: rgb(202, 209, 207)
+}
+
+.td-ordre-tache{
+  text-align: center;
+}
+
+.badge-liste-tache{
+  border-radius: 38%;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #363738;
+  font-weight: bold;
+  background-color: rgb(202, 209, 207)
+}
+
+.ul-liste-tache a:hover{
+  text-decoration: none;
+  background-color: #74b0c4;
+  color: black;
+}
+
+
+
+.h1-a-element{
+  color: inherit;
+}
+
+.h1-a-element:hover{
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* Style the input */
+.input_fonction_ajout_rapide_tache {
+  /*margin: 0;*/
+  margin-left: 9px;
+  border: none;
+  border-radius: 0;
+  width: 75%;
+  padding: 5px;
+  /*float: left;*/
+  /*font-size: 16px;*/
+  text-align:center;
+}
+
+
+/* Style the "Add" button */
+.boutton_fonction_ajout_rapide_tache {
+  padding: 7px;
+  /*width: 25%;*/
+  background: #d9d9d9;
+  color: #555;
+  /*float: left;*/
+  /*text-align: center;*/
+  /*font-size: 16px;*/
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.boutton_fonction_ajout_rapide_tache:hover {
+  background-color: #bbb;
+}
+
+
+
+
+.action_volatile_sur_ligne_tache{
+  /*display: none;*/
+}
+/*
+td:hover + #action_volatile_sur_ligne_tache {
+  display:block;
+}
+*/
+
+
+.td-flex-container {
+  display: flex;
+  align-items: stretch;
+}
+
+.td-span-flex{
+  
+}
+.td-action-volatile{
+ background-color: DodgerBlue;
+ text-align: right;
+}
+
+.td-flex-container > span {
+  /*background-color: DodgerBlue;*/
+  /*color: white;*/
+  /*width: 100px;*/
+  /*margin: 10px;*/
+  /*text-align: center;*/
+  /*line-height: 75px;*/
+  /*font-size: 30px;*/
+  border-style: none;
+}
+
+.liste-taches-nom{
+  /*display: inline-block;*/
+  z-index: -1;
+}
+.liste-taches-action-volatile{
+  display: none;
+  float: right;
+  margin-right: 21px;
+}
+
+.action-volatile-archiver-icon-tr{
+  width: 24px;
+  height: 24px;
+}

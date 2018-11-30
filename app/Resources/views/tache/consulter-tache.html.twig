@@ -2,15 +2,21 @@
 
 {% set conf_tache_vue =
     {
-        'id':true,
+        
         'nom':true,
+        'date_creation_et_date_mise_jour_et_statut':true,
+        'date_creation':true,
+        'date_mise_jour':true,
         'statut':true,
         'objectif':true,
         'remarque':true,
-        'date_creation':true,
-        'date_mise_jour':true,
-        'guid':true,
         'description':true,
+        'archiver':true,
+        'supprimer':true,
+        'id':true,
+        'id_et_guid':true,
+        'guid':true,
+        
     }
 %}
 
@@ -18,32 +24,74 @@
 
     <div class="container">
 
-        <h1 class="h1-app">Ma tâche</h1>
+        {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
+            <h1 class="h1-app"><a class="h1-a-element" href="{{ path('consulter_tache', { 'id':reponse.resultat.id }) }}">Ma tâche</a></h1>
+        {% else %}
+            <h1 class="h1-app"><a class="h1-a-element" href="#">Ma tâche</a></h1>
+        {% endif %}
+      
 
         {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
             {% set tache = reponse.resultat %}
          
             <div id="principale_information_tache" class="principale_information_tache">
-                    <div class="flex-container">
-                        <div class="item-flex-auto-grid-data auto"><span class="data-style-label">ID</span> : {{tache.id}}</div>
-                        <div class="item-flex-auto-grid-data auto"><span class="data-style-label">GUID</span> : {{tache.guid}}</div>
-                    </div>
+                    {% if conf_tache_vue.nom %}
+                        <div class="flex-container">
+                            <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Tâche <span class="badge-ordre-tache">{{ tache.ordre }}</span> : </span>{{tache.nom}}</div>
+                        </div>
+                    {% endif %}
+                    {% if conf_tache_vue.date_creation_et_date_mise_jour_et_statut %}
+                        <div class="flex-container">
+                            {% if conf_tache_vue.date_creation %}
+                                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Créée : </span>{{tache.datecreation|date('Y-m-d H:i:s')}}</div>
+                            {% endif %}
+                            {% if conf_tache_vue.date_mise_jour %}
+                                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Mise à jour : </span>{{tache.datemiseajour|date('Y-m-d H:i:s')}}</div>
+                            {% endif %}
+                            {% if conf_tache_vue.statut %}
+                                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Statut : </span>{{tache.statut}}</div>
+                            {% endif %}  
+                        </div>
+                    {% endif %}
 
-                    <div class="flex-container">
-                        <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Nom</span> : {{tache.nom}}</div>
-                        <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Statut</span> : {{tache.statut}}</div>
-                    </div>
+                    {% if conf_tache_vue.id_et_guid %}
+                        <div class="flex-container">
+                            {% if conf_tache_vue.id %}
+                                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">GUID : </span>{{tache.guid}}</div>
+                                
+                            {% endif %}
+                            {% if conf_tache_vue.guid %}
+                                <div class="item-flex-auto-grid-data auto">
+                                    <span class="data-style-label">Archivée ? </span>
+                                    {% if tache.estArchivee %} Oui {% else %} Non {% endif %}
+                                </div>                            
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                   
 
-                    <div class="flex-container">
-                        <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Créée le : </span>{{tache.datecreation|date('Y-m-d H:i:s')}}</div>
-                        <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Mise à jour le : </span>{{tache.datemiseajour|date('Y-m-d H:i:s')}}</div>
-                    </div>
-
+                    
                     <div class="flex-container">
                         <div class="item-flex-auto-grid-data auto">
-                            <span class="link-page-description-tache"><a class="a-button-link-page-description-tache" href="{{path('consulter_tache_description', {'id':tache.id})}}">Description</a></span>
-                            <span class="link-page-objectif-tache"><a class="a-button-link-page-objectif-tache" href="{{path('consulter_tache_objectif', {'id':tache.id})}}">Objectif</a></span>
-                            <span class="link-page-remarque-tache"><a class="a-button-link-page-remarque-tache" href="{{path('consulter_tache_remarque', {'id':tache.id})}}">Remarque</a></span>
+                            {% if conf_tache_vue.description %}
+                                <span class="link-page-description-tache"><a class="a-button-link-page-description-tache" href="{{path('consulter_tache_description', {'id':tache.id})}}"><img class="consulter-tache-description-icon" src="{{ asset('application/images/icons8-resume-template-40.png') }}">Description</a></span>
+                            {% endif %}
+                            {% if conf_tache_vue.objectif %}
+                                <span class="link-page-objectif-tache"><a class="a-button-link-page-objectif-tache" href="{{path('consulter_tache_objectif', {'id':tache.id})}}"><img src="{{ asset('application/images/icons8-target-40.png') }}">Objectif</a></span>
+                            {% endif %}
+                            {% if conf_tache_vue.remarque %}
+                                <span class="link-page-remarque-tache"><a class="a-button-link-page-remarque-tache" href="{{path('consulter_tache_remarque', {'id':tache.id})}}"><img src="{{ asset('application/images/icons8-comments-40.png') }}">Remarque</a></span>
+                            {% endif %}
+                            {% if conf_tache_vue.archiver %}
+                                {% if tache.estArchivee %}
+                                    <span class="link-page-desarchiver-tache"><a class="a-button-link-page-desarchiver-tache" href="{{path('desarchiver_tache', {'id':tache.id})}}"><img src="{{ asset('application/images/icons8-inbox-40.png') }}">Désarchiver</a></span>
+                                {% else %}
+                                    <span class="link-page-archiver-tache"><a class="a-button-link-page-archiver-tache" href="{{path('archiver_tache', {'id':tache.id})}}"><img src="{{ asset('application/images/icons8-downloads-40.png') }}">Archiver</a></span>
+                                {% endif %}
+                            {% endif %}
+                            {% if conf_tache_vue.supprimer %}
+                                <span class="link-page-supprimer-tache"><a class="a-button-link-page-supprimer-tache" href="{{path('supprimer_tache', {'id':tache.id})}}"><img src="{{ asset('application/images/icons8-trash-40.png') }}">Supprimer</a></span>
+                            {% endif %}
                         </div>
                     </div>
             </div>
@@ -54,10 +102,9 @@
 
         <div class="principale_information_tache_action">
                 <div class="flex-container-action">
-                    <div class="item-flex-auto-grid-action-consulter auto">
+                    <div class="auto">
                         {% if reponse.message == 'success' %}
                         <a class='successButton a-button a-action-consulter' href="{{ path('modifier_tache', {'id':tache.id} ) }}">Modifier</a>
-                        <a class='dangerButton a-button a-action-consulter' href="{{ path('supprimer_tache', {'id':tache.id} ) }}">Supprimer</a>
                         {% endif %}
                         <a class='infoButton a-button a-action-consulter' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
                     </div>

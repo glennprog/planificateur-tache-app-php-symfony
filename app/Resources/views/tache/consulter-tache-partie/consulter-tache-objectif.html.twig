@@ -18,19 +18,27 @@
 
     <div class="container">
 
-        <h1 class="h1-app">Ma tâche</h1>
+        {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
+            <h1 class="h1-app"><a class="h1-a-element" href="{{ path('consulter_tache_objectif', { 'id':reponse.resultat.id }) }}">Ma tâche</a></h1>
+        {% else %}
+            <h1 class="h1-app"><a class="h1-a-element" href="#">Ma tâche</a></h1>
+        {% endif %}
 
         {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
             <div class="flex-container">
-                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Nom</span> : {{reponse.resultat.nom}}</div>
+                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Tâche <span class="badge-ordre-tache">{{ reponse.resultat.ordre }}</span> : </span>{{reponse.resultat.nom}}</div>
+            </div>
+            <div class="flex-container">
+                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Statut</span> : {{reponse.resultat.statut}}</div>
             </div>
             <div class="flex-container">
                 <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Créée le : </span>{{reponse.resultat.date_creation|date('Y-m-d H:i:s')}}</div>
-                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Statut</span> : {{reponse.resultat.statut}}</div>
+                <div class="item-flex-auto-grid-data auto"><span class="data-style-label">Archiver ? </span> : {% if reponse.resultat.est_archivee %} Oui {% else %} NOn {% endif %}</div>   
             </div>
         {% endif %}
 
-        <h2 class="h2-app consulter-tache-objectif">Objectif</h2>
+        <h2 class="h2-app consulter-tache-objectif">Objectif <img class="consulter-tache-objectif-icon" src="{{ asset('application/images/icons8-target-40.png') }}"></h2>
+        
 
         {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
             {% set tache = reponse.resultat %}
@@ -41,8 +49,14 @@
                     </div>
                     <div class="flex-container">
                         <div class="item-flex-auto-grid-data auto">
-                            <span class="link-page-objectif-tache"><a class="a-button-link-page-description-tache" href="{{path('consulter_tache_description', {'id':tache.id})}}">Description</a></span>
-                            <span class="link-page-remarque-tache"><a class="a-button-link-page-remarque-tache" href="{{path('consulter_tache_remarque', {'id':tache.id})}}">Remarque</a></span>
+                            <span class="link-page-objectif-tache"><a class="a-button-link-page-description-tache" href="{{path('consulter_tache_description', {'id':tache.id})}}"><img class="consulter-tache-description-icon" src="{{ asset('application/images/icons8-resume-template-40.png') }}">Description</a></span>
+                            <span class="link-page-remarque-tache"><a class="a-button-link-page-remarque-tache" href="{{path('consulter_tache_remarque', {'id':tache.id})}}"><img class="consulter-tache-remarque-icon" src="{{ asset('application/images/icons8-comments-40.png') }}">Remarque</a></span>
+                            {% if tache.est_archivee %}
+                                <span class="link-page-desarchiver-tache"><a class="a-button-link-page-desarchiver-tache" href="{{path('desarchiver_tache', {'id':tache.id})}}"><img src="{{ asset('application/images/icons8-inbox-40.png') }}">Désarchiver</a></span>
+                            {% else %}
+                                <span class="link-page-archiver-tache"><a class="a-button-link-page-archiver-tache" href="{{path('archiver_tache', {'id':tache.id})}}"><img src="{{ asset('application/images/icons8-downloads-40.png') }}">Archiver</a></span>
+                            {% endif %}
+                            <span class="link-page-supprimer-tache"><a class="a-button-link-page-supprimer-tache" href="{{path('supprimer_tache', {'id':tache.id})}}"><img src="{{ asset('application/images/icons8-trash-40.png') }}">Supprimer</a></span>
                         </div>
                     </div>
             </div>
@@ -56,7 +70,6 @@
                     <div class="item-flex-auto-grid-action-consulter auto">
                         {% if reponse.message == 'success' %}
                         <a class='grayButton a-button a-action-consulter' href="{{ path('consulter_tache', {'id':tache.id} ) }}">Retour</a>
-                        <a class='dangerButton a-button a-action-consulter' href="{{ path('supprimer_tache', {'id':tache.id} ) }}">Supprimer</a>
                         {% endif %}
                         <a class='infoButton a-button a-action-consulter' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
                     </div>

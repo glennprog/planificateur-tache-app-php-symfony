@@ -14,7 +14,11 @@
 
     <div class="container">
     
-        <h1 class="h1-app">Modifier ma tâche</h1>
+        {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
+            <h1 class="h1-app"><a class="h1-a-element" href="{{ path('modifier_tache', { 'id':reponse.resultat.id }) }}">Modifier ma tâche</a></h1>
+        {% else %}
+            <h1 class="h1-app"><a class="h1-a-element" href="#">Modifier ma tâche</a></h1>
+        {% endif %}
         
         {% if reponse.resultat != '{}' and  reponse.message == 'success' %}
             <div id="form-request">
@@ -25,71 +29,82 @@
                 
                     {{ form_start(reponse.edit_form) }}
 
-                    <div class="flex-container-nouvelle-tache">
-                        <div class="nouvelle-tache-input-label data-style-label">
-                            Nom de la tâche
+                    <div class="flex-container-modifier-tache">
+                        <div class="modifier-tache-input-label data-style-label">
+                            Tâche
                         </div>
-                        <div class="nouvelle-tache-input">
-                            {{ form_widget(reponse.edit_form.nom, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
+                        <div class="modifier-tache-input">
+                            {{ form_widget(reponse.edit_form.nom, {'attr': {'class': 'modifier-tache-input-border', 'autocomplete':'off'} }) }}
                         </div>
-                        <div class="nouvelle-tache-input-error">
+                        <div class="modifier-tache-input-error">
                             {{ form_errors(reponse.edit_form.nom) }}
                         </div>
                     </div>
                     
-                    <div class="flex-container-nouvelle-tache">
-                        <div class="nouvelle-tache-input-label data-style-label">
-                            Statut de la tâche
+                    <div class="flex-container-modifier-tache">
+                        <div class="modifier-tache-input-label data-style-label">
+                            <img src="{{ asset('application/images/icons8-workflow-40.png') }}"> Statut
                         </div>
-                        <div class="nouvelle-tache-input">
-                            {{ form_widget(reponse.edit_form.statut, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
+                        <div class="modifier-tache-input">
+                            {{ form_widget(reponse.edit_form.statut, {'attr': {'class': 'modifier-tache-input-border', 'autocomplete':'off'} }) }}
                         </div>
-                        <div class="nouvelle-tache-input-error">
+                        <div class="modifier-tache-input-error">
                             {{ form_errors(reponse.edit_form.statut) }}
                         </div>
                     </div>
 
-                    <div class="flex-container-nouvelle-tache">
-                        <div class="nouvelle-tache-input-label data-style-label">
-                            Description de la tâche
+                    <div class="flex-container-modifier-tache">
+                        <div class="modifier-tache-input-label data-style-label">
+                            <img src="{{ asset('application/images/icons8-resume-template-40.png') }}"> Description
                         </div>
-                        <div class="nouvelle-tache-input">
-                            {{ form_widget(reponse.edit_form.description, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
+                        <div class="modifier-tache-input">
+                            {{ form_widget(reponse.edit_form.description, {'attr': {'class': 'modifier-tache-input-border', 'autocomplete':'off'} }) }}
                         </div>
-                        <div class="nouvelle-tache-input-error">
+                        <div class="modifier-tache-input-error">
                             {{ form_errors(reponse.edit_form.description) }}
                         </div>
                     </div>
 
-                    <div class="flex-container-nouvelle-tache">
-                        <div class="nouvelle-tache-input-label data-style-label">
-                            Objectif de la tâche
+                    <div class="flex-container-modifier-tache">
+                        <div class="modifier-tache-input-label data-style-label">
+                            <img src="{{ asset('application/images/icons8-target-40.png') }}"> Objectif
                         </div>
-                        <div class="nouvelle-tache-input">
-                            {{ form_widget(reponse.edit_form.objectif, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
+                        <div class="modifier-tache-input">
+                            {{ form_widget(reponse.edit_form.objectif, {'attr': {'class': 'modifier-tache-input-border', 'autocomplete':'off'} }) }}
                         </div>
-                        <div class="nouvelle-tache-input-error">
+                        <div class="modifier-tache-input-error">
                             {{ form_errors(reponse.edit_form.objectif) }}
                         </div>
                     </div>
 
-                    <div class="flex-container-nouvelle-tache">
-                        <div class="nouvelle-tache-input-label data-style-label">
-                            Remarque de la tâche
+                    <div class="flex-container-modifier-tache">
+                        <div class="modifier-tache-input-label data-style-label">
+                            <img src="{{ asset('application/images/icons8-comments-40.png') }}"> Remarque
                         </div>
-                        <div class="nouvelle-tache-input">
-                            {{ form_widget(reponse.edit_form.remarque, {'attr': {'class': 'nouvelle-tache-input-border', 'autocomplete':'off'} }) }}
+                        <div class="modifier-tache-input">
+                            {{ form_widget(reponse.edit_form.remarque, {'attr': {'class': 'modifier-tache-input-border', 'autocomplete':'off'} }) }}
                         </div>
-                        <div class="nouvelle-tache-input-error">
+                        <div class="modifier-tache-input-error">
                             {{ form_errors(reponse.edit_form.remarque) }}
                         </div>
                     </div>    
 
-                    <div class="nouvelle-tache-input-flex-container-action">
-                        <div class="nouvelle-tache-input-item-flex nouvelle-tache-input-auto">
-                            <input class="successButton a-button a-action-modifier" type="submit" value="Modifier" />
-                            <a class='grayButton a-button a-action-modifier' href="{{ path('consulter_tache', {'id':reponse.resultat.id} ) }}">Retour</a>
-                            <a class='infoButton a-button a-action-modifier' href="{{ path('consulter_liste_taches') }}">Liste des tâches</a>
+                    <div class="flex-container-nouvelle-tache modifier-tache-input-ordre-tache">
+                        <div class="modifier-tache-input-label data-style-label">
+                            Ordre de la tâche
+                        </div>
+                        <div class="modifier-tache-input">
+                            {{ form_widget(reponse.edit_form.ordre, {'attr': {'class': 'modifier-tache-input-border', 'autocomplete':'off'} }) }}
+                        </div>
+                        <div class="modifier-tache-input-error">
+                            {{ form_errors(reponse.edit_form.ordre) }}
+                        </div>
+                    </div> 
+
+                    <div class="modifier-tache-input-flex-container-action modifier-tache-last-pill-item">
+                        <div class="modifier-tache-input-item-flex modifier-tache-input-auto">
+                            <input class="successButton a-button a-action-modifier" type="submit" value="Sauvegarder" />
+                            <a class='grayButton a-button a-action-retourner-tache' href="{{ path('consulter_tache', {'id':reponse.resultat.id} ) }}">Retour</a>
                         </div>
                     </div>
 

@@ -1,6 +1,7 @@
   .flex-container-modifier-tache {
     display: flex;
     flex-direction: column;
+    margin-top: 17px;
     /*background-color: DodgerBlue;*/
   }
 
@@ -38,9 +39,7 @@
   }
 
   .modifier-tache-input-flex-container-action{
-   
     display: flex;
-    margin-bottom: 0px;
     margin-bottom: 30px;
     }
 
@@ -62,4 +61,12 @@
 
 .a-action-modifier{
   margin-right: 9px;
+}
+
+.modifier-tache-input-ordre-tache{
+  width: 200px;
+}
+
+.modifier-tache-last-pill-item{
+  margin-top: 17px;
 }

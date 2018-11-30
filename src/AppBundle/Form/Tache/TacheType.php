@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class TacheType extends AbstractType
 {
@@ -23,9 +24,15 @@ class TacheType extends AbstractType
             ))
             ->add('objectif', TextareaType::class, array(
                 'attr' => array('cols' => '5', 'rows' => '3'),
+                'required' => false
             ))
             ->add('remarque', TextareaType::class, array(
                 'attr' => array('cols' => '5', 'rows' => '3'),
+                'required' => false
+            ))
+            ->add('ordre', IntegerType::class, array(
+                'attr' => array('min' => '0'),
+                'required' => false
             ))
         ;
     }
